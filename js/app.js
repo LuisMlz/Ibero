@@ -52,6 +52,18 @@ function checkAuthentication() {
 
 checkAuthentication();
 
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker
+            .register("./serviceWorker.js")
+            .then(banner(),
+                console.log("service worker registrado"),
+            )
+            .catch(err => console.log("service worker no registrado", err));
+    });
+}
+
+
 //PROCESOS DE LA INTERFAZ
 var showVCard = () => {
     var output = "<img class='vcardImage' src='' alt='NO PUDIMOS ENCONTRAR TU IMAGEN' id='vcardpwa' />";

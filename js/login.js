@@ -120,7 +120,7 @@ function insertAuth(data) {
 if ("serviceWorker" in navigator) {
     window.addEventListener("load", function () {
         navigator.serviceWorker
-            .register("/serviceWorker.js")
+            .register("./serviceWorker.js")
             .then(banner(),
                 console.log("service worker registrado"),
             )

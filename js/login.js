@@ -48,9 +48,6 @@ function checkAuthentication() {
 
 checkAuthentication();
 
-
-document.addEventListener("DOMContentLoaded", banner);
-
 const loginForm = document.getElementById('login-form');
 const userInput = document.getElementById('user');
 const passwordInput = document.getElementById('password');
@@ -119,6 +116,17 @@ function insertAuth(data) {
     };
     request.onerror = (err) => { console.log("Error al insertar el USER ID" + err) };
 
+}
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker
+            .register("./serviceWorker.js")
+            .then(banner(),
+                console.log("service worker registrado"),
+            )
+            .catch(err => console.log("service worker no registrado", err));
+    });
 }
 
 

@@ -30,10 +30,8 @@ function checkAuthentication() {
         authenticationData.onsuccess = function (event) {
             const result = event.target.result;
             if (!result) {
-                alert("entro a redireccionar")
                 window.location.href = 'index.html';
             } else {
-                alert("se queda en la pagina")
                 peticion(result)
             }
         };
@@ -51,17 +49,6 @@ function checkAuthentication() {
 }
 
 checkAuthentication();
-
-if ("serviceWorker" in navigator) {
-    window.addEventListener("load", function () {
-        navigator.serviceWorker
-            .register("./serviceWorker.js")
-            .then(banner(),
-                console.log("service worker registrado"),
-            )
-            .catch(err => console.log("service worker no registrado", err));
-    });
-}
 
 
 //PROCESOS DE LA INTERFAZ

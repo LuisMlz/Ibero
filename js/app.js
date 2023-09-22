@@ -30,7 +30,7 @@ function checkAuthentication() {
         authenticationData.onsuccess = function (event) {
             const result = event.target.result;
             if (!result) {
-                window.location.href = './index.html';
+                window.location.href = '/index.html';
             } else {
                 peticion(result)
             }

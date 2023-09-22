@@ -1,9 +1,9 @@
 const staticVCard = "vcard-v1";
 const assets = [
   "./",
-  "./js/app.js",
-  "./vcard.html",
-  "./css/style.css",
+  "./js/login.js",
+  "./index.html",
+  "./css/loginStyle.css",
 ];
 
 self.addEventListener("install", installEvent => {

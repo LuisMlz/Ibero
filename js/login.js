@@ -29,7 +29,6 @@ function checkAuthentication() {
         authenticationData.onsuccess = function (event) {
             const result = event.target.result;
             if (result) {
-                alert("REGRESAAAAAA")
                 window.location.href = 'vcard.html';
             }
         };

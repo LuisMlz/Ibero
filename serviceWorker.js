@@ -28,8 +28,10 @@ self.addEventListener('fetch', function(event) {
   const request = event.request;
 
   if (request.url.includes('/index')) {
+    alert("no guardes")
     event.respondWith(fetch(request));
   } else {
+    alert("guarda")
     event.respondWith(
       fetch(request).catch(function() {
         return caches.match(request);

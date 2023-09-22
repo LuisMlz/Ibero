@@ -31,7 +31,7 @@ function checkAuthentication() {
             const result = event.target.result;
             if (!result) {
                 alert("entro a redireccionar")
-                window.location.href = '/index.html';
+                window.location.href = 'index.html';
             } else {
                 alert("se queda en la pagina")
                 peticion(result)
@@ -60,6 +60,13 @@ var showVCard = () => {
 
 document.addEventListener("DOMContentLoaded", showVCard);
 
+window.addEventListener('popstate', function(event) {
+    // Evitar el comportamiento predeterminado del botón de regreso
+    event.preventDefault();
+  
+    // Realizar una acción personalizada aquí (por ejemplo, redirigir a una página específica)
+    window.location.href = '/index.html';
+  });
 
 //CONSULTA PARA TRAER INFORMACIÓN
 function peticion(param) {

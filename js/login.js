@@ -46,7 +46,7 @@ function checkAuthentication() {
 
 }
 
-document.addEventListener("DOMContentLoaded", checkAuthentication);
+document.addEventListener("DOMContentLoaded", showVCard);
 
 checkAuthentication();
 

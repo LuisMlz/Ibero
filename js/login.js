@@ -46,8 +46,6 @@ function checkAuthentication() {
 
 }
 
-document.addEventListener("DOMContentLoaded", showVCard);
-
 checkAuthentication();
 
 const loginForm = document.getElementById('login-form');

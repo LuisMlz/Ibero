@@ -29,7 +29,8 @@ function checkAuthentication() {
         authenticationData.onsuccess = function (event) {
             const result = event.target.result;
             if (result) {
-                window.location.href = 'vcard.html';
+                alert("REGRESAAAAAA")
+                window.location.href = '/vcard.html';
             }
         };
 
@@ -111,7 +112,7 @@ function insertAuth(data) {
 
     request.onsuccess = (event) => {
         console.log("USER ID insertado de manera correcta"),
-            window.location.href = "vcard.html"
+            window.location.href = "/vcard.html"
     };
     request.onerror = (err) => { console.log("Error al insertar el USER ID" + err) };
 

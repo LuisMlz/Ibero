@@ -30,8 +30,10 @@ function checkAuthentication() {
         authenticationData.onsuccess = function (event) {
             const result = event.target.result;
             if (!result) {
-                window.location.href = '/Ibero/index.html';
+                alert("entro a redireccionar")
+                window.location.href = '/index.html';
             } else {
+                alert("se queda en la pagina")
                 peticion(result)
             }
         };

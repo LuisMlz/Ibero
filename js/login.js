@@ -30,7 +30,7 @@ function checkAuthentication() {
             const result = event.target.result;
             if (result) {
                 alert("REGRESAAAAAA")
-                window.location.href = './vcard.html';
+                window.location.href = 'vcard.html';
             }
         };
 
@@ -45,6 +45,8 @@ function checkAuthentication() {
     }
 
 }
+
+document.addEventListener("DOMContentLoaded", checkAuthentication);
 
 checkAuthentication();
 
@@ -112,7 +114,7 @@ function insertAuth(data) {
 
     request.onsuccess = (event) => {
         console.log("USER ID insertado de manera correcta"),
-            window.location.href = "./vcard.html"
+            window.location.href = "vcard.html"
     };
     request.onerror = (err) => { console.log("Error al insertar el USER ID" + err) };
 
@@ -128,6 +130,7 @@ if ("serviceWorker" in navigator) {
             .catch(err => console.log("service worker no registrado", err));
     });
 }
+
 
 //CREACIÓN DE BANNER DE INSTALACIÓN
 function banner() {

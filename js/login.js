@@ -1,3 +1,16 @@
+/*
+    -- Author:	Luis Melendez
+    -- Create date: 11/09/2023
+    -- Update date: 22/09/2023 
+    -- Description:	PWA creado con la finalidad de mostrar el VCARD en la app
+                    asi como en el navegador.
+    --Update:       Se agrego mejoro la estabilidad de la creación de VCARD dentro
+                    del PWA.
+    --Notes:        En IOS se han tenido problemas de compatibilidad en Android al 
+                    parecer todo bien.
+*/
+
+
 //VARIABLES GLOBALES
 const authDB = indexedDB.open('vcard', 1);
 
@@ -60,12 +73,20 @@ loginButton.addEventListener('click', () => {
     const password = passwordInput.value;
 
     if (user == "" && password == "") {
-        alert("Debes ingresar usuario y contraseña")
+        Swal.fire(
+            'Recuerda',
+            'Debes ingresar usuario y contraseña.',
+            'info'
+        )
     } else {
         if (user == "25801" && password == "12345") {
             insertAuth(user)
         } else {
-            alert("No existe usuario en la Base de Datos")
+            Swal.fire(
+                'Lo siento',
+                'Este usuario no existe.',
+                'warning'
+            )
         }
         //const niEmp = {
         //    user: param,
@@ -103,7 +124,11 @@ function insertAuth(data) {
 
     db.onversionchange = function () {
         db.close();
-        alert("La base de datos está desactualizada, por favor recargue la página.")
+        Swal.fire(
+            'Cuidado',
+            'La base de datos está desactualizada, por favor recargue la página.',
+            'warning'
+        )
     };
 
     let store = db.transaction("card", "readwrite").objectStore("card");

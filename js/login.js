@@ -85,7 +85,7 @@ loginButton.addEventListener('click', () => {
             Swal.fire(
                 'Lo siento',
                 'Este usuario no existe.',
-                'warning'
+                'info'
             )
         }
         //const niEmp = {

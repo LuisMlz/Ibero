@@ -166,49 +166,26 @@ function banner() {
         e.preventDefault();
         deferredPrompt = e;
 
-        // installBanner.style.display = 'block';
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
-          }).then((result) => {
-            if (result.isConfirmed) {
-                if (deferredPrompt) {
-                    deferredPrompt.prompt();
-
-                    deferredPrompt.userChoice.then((choiceResult) => {
-                        if (choiceResult.outcome === 'accepted') {
-                            console.log('La App ha sido instalada correctamente');
-                        }
-                        deferredPrompt = null;
-                    });
-                }
-            }
-          })
-        
+        installBanner.style.display = 'block';
     });
 
-    // installButton.addEventListener('click', () => {
-    //     if (deferredPrompt) {
-    //         deferredPrompt.prompt();
+    installButton.addEventListener('click', () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
 
-    //         deferredPrompt.userChoice.then((choiceResult) => {
-    //             if (choiceResult.outcome === 'accepted') {
-    //                 console.log('La App ha sido instalada correctamente');
-    //             }
-    //             deferredPrompt = null;
-    //         });
-    //     }
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('La App ha sido instalada correctamente');
+                }
+                deferredPrompt = null;
+            });
+        }
 
-    //     installBanner.style.display = 'none';
-    // });
+        installBanner.style.display = 'none';
+    });
 
-    // dismissButton.addEventListener('click', () => {
-    //     installBanner.style.display = 'none';
-    // });
+    dismissButton.addEventListener('click', () => {
+        installBanner.style.display = 'none';
+    });
 
 }

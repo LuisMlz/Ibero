@@ -33,8 +33,11 @@ function checkAuthentication() {
             if (!result) {
                 window.location.href = 'index.html';
             } else { 
-                alert("va bien a insertar") 
-                peticion(result)
+                alert("va bien a insertar")
+                setTimeout(() => {
+                    peticion(result)
+                  }, "1000"); 
+                
             }
         };
     

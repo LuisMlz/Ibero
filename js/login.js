@@ -61,7 +61,15 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     checkAuthentication()
-    banner()
+    if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+            navigator.serviceWorker
+                .register("./serviceWorker.js")
+                .then(console.log("service worker registrado"), banner())
+                .catch(err => console.log("service worker no registrado", err));
+        });
+    }
+        
 
     const userInput = document.getElementById('user');
     const passwordInput = document.getElementById('password');
@@ -269,13 +277,3 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 });
-
-if ("serviceWorker" in navigator) {
-    window.addEventListener("load", function () {
-        navigator.serviceWorker
-            .register("./serviceWorker.js")
-            .then(console.log("service worker registrado"))
-            .catch(err => console.log("service worker no registrado", err));
-    });
-}
-

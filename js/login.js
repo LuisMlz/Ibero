@@ -255,6 +255,7 @@ function banner() {
     window.addEventListener('appinstalled', () => {
         deferredPrompt = null;
         //divDescripcion
+        alert("INSTALO BIEN")
         parrafo.innerText = ""
         parrafo.innerText = "Bienvenido a tu VCard"
     });

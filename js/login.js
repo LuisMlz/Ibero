@@ -1,16 +1,15 @@
 /*
     -- Author:	Luis Melendez
     -- Create date: 11/09/2023
-    -- Update date: 22/09/2023 
+    -- Update date: 25/09/2023 
     -- Description:	PWA creado con la finalidad de mostrar el VCARD en la app
                     asi como en el navegador.
-    --Update:       Se agrego mejoro la estabilidad de la creación de VCARD dentro
-                    del PWA.
+    --Update:       Se agrego la libreria SweetAlert2 para las notificaciones, asi como
+                    DOMPurify para limpiar nuestras consultas e inputs de ataques
+                    XSS
     --Notes:        En IOS se han tenido problemas de compatibilidad en Android al 
                     parecer todo bien.
 */
-
-
 //VARIABLES GLOBALES
 const authDB = indexedDB.open('vcard', 1);
 
@@ -40,7 +39,9 @@ function checkAuthentication() {
         const authenticationData = authStore.get('userId');
 
         authenticationData.onsuccess = function (event) {
+
             const result = event.target.result;
+
             if (result) {
                 window.location.href = 'vcard.html';
             }
@@ -49,7 +50,6 @@ function checkAuthentication() {
         authenticationData.onerror = function (event) {
             console.error('Error al consultar USER ID:', event.target.error);
         };
-
     }
 
     authDB.onerror = function (e) {
@@ -64,6 +64,7 @@ const loginForm = document.getElementById('login-form');
 const userInput = document.getElementById('user');
 const passwordInput = document.getElementById('password');
 const loginButton = document.getElementById('btnLogin');
+var instructionsBanner = document.getElementById('linkInstrucciones');
 
 
 // Iniciar Sesión
@@ -72,15 +73,19 @@ loginButton.addEventListener('click', () => {
     const user = userInput.value;
     const password = passwordInput.value;
 
-    if (user == "" && password == "") {
+    //LIMPIAMOS LOS INPUTS DE POSIBLES ATAQUES XSS.
+    const cleanUser = DOMPurify.sanitize(user);
+    const cleanPassword = DOMPurify.sanitize(password);
+
+    if (cleanUser == "" || cleanPassword == "") {
         Swal.fire(
             'Recuerda',
             'Debes ingresar usuario y contraseña.',
             'info'
         )
     } else {
-        if (user == "25801" && password == "12345") {
-            insertAuth(user)
+        if (cleanUser == "25801" && cleanPassword == "12345") {
+            insertAuth(cleanUser)
         } else {
             Swal.fire(
                 'Lo siento',
@@ -88,38 +93,48 @@ loginButton.addEventListener('click', () => {
                 'info'
             )
         }
-        //const niEmp = {
+        // const niEmp = {
         //    user: param,
-        //};
+        // };
 
-        //fetch('l', {
+        // fetch('l', {
         //    method: 'POST',
         //    headers: {
         //        'Content-Type': 'application/json',
         //    },
         //    body: JSON.stringify(niEmp)
-        //})
+        // })
         //    .then((response) => {
-        //        if (!response.ok) {
-        //            throw new Error('Error en la solicitud de la API');
-        //        }
         //        return response.json();
         //    })
         //    .then((data) => {
-        //        console.log("Informacion del Usuario consultada con exito!")
-        //        insertAuth(data)
+        //        if(data != ""){
+        //         console.log("Informacion del Usuario consultada con exito!")
+        //         insertAuth(data)
+        //        }else{
+        //             Swal.fire(
+        //                 'Lo siento.',
+        //                 'Este usuario no existe.',
+        //                 'info'
+        //             )
+        //        }
         //    })
         //    .catch((error) => {
-        //        console.error('Error al consumir la API:', error);
+        //          Swal.fire(
+        //               'Error.',
+        //               'No pudimos consultar la información, favor de reportar',
+        //               'error'
+        //          )
         //    });
 
     }
 
 });
 
-
 function insertAuth(data) {
 
+    //LIMPIAMOS EL PARAMETRO PARA EVITAR ATAQUES XSS
+    const cleanData = DOMPurify.sanitize(data);
     const db = authDB.result;
 
     db.onversionchange = function () {
@@ -132,7 +147,7 @@ function insertAuth(data) {
     };
 
     let store = db.transaction("card", "readwrite").objectStore("card");
-    let request = store.put(data, "userId");
+    let request = store.put(cleanData, "userId");
 
     request.onsuccess = (event) => {
         console.log("USER ID insertado de manera correcta"),
@@ -152,7 +167,6 @@ if ("serviceWorker" in navigator) {
             .catch(err => console.log("service worker no registrado", err));
     });
 }
-
 
 //CREACIÓN DE BANNER DE INSTALACIÓN
 function banner() {
@@ -184,8 +198,64 @@ function banner() {
         installBanner.style.display = 'none';
     });
 
+
     dismissButton.addEventListener('click', () => {
         installBanner.style.display = 'none';
     });
 
+
+}
+
+instructionsBanner.addEventListener('click', () => {
+    Swal.fire({
+        title: '<img src="images/ibero.png" width="60" height="60" class="img" alt="user">',
+        html:
+          '<div class="col-md-12"><h2>Instrucciones de instalación</h2></div>'+
+          '<div><strong>Safari/IOS</strong></div>'+
+          '<div><p>Toca el icono de "Compartir" en la parte inferior de tu navegador (Safari). Es un cuadro con una flecha arriba</p></div>'+
+          '<div><p>Aparecera una ventana emergente donde podremos personalizar el nombre si asi se desea. Tocar "Agregar" en la esquina superior derecha</p></div>'+
+          '<div><p>Se agregara nuestra app a tu pantalla de inicio y desde este momento podras acceder a ella como cualquier otra app.</p></div>',
+        focusConfirm: false,
+        confirmButtonText:
+          '<i class="fa fa-thumbs-up"></i> Entendido!',
+      })
+});
+
+var a = detectarSistemaOperativo();
+alert(a)
+var b = detectarTipoDeDispositivo();
+alert(b)
+
+// Detectar el tipo de dispositivo
+function detectarTipoDeDispositivo() {
+    const userAgent = navigator.userAgent;
+
+    if (/Android/i.test(userAgent)) {
+        return "Android";
+    } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+        return "iOS";
+    } else if (/Windows Phone/i.test(userAgent)) {
+        return "Windows Phone";
+    } else {
+        return "Otro";
+    }
+}
+
+// Detectar el sistema operativo
+function detectarSistemaOperativo() {
+    const userAgent = navigator.userAgent;
+
+    if (/Android/i.test(userAgent)) {
+        return "Android";
+    } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
+        return "iOS";
+    } else if (/Windows NT/i.test(userAgent)) {
+        return "Windows";
+    } else if (/Mac OS/i.test(userAgent)) {
+        return "macOS";
+    } else if (/Linux/i.test(userAgent)) {
+        return "Linux";
+    } else {
+        return "Desconocido";
+    }
 }

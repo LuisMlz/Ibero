@@ -1,13 +1,13 @@
 /*
     -- Author:	Luis Melendez
     -- Create date: 11/09/2023
-    -- Update date: 25/09/2023 
+    -- Update date: 25/09/2023
     -- Description:	PWA creado con la finalidad de mostrar el VCARD en la app
                     asi como en el navegador.
     --Update:       Se agrego la libreria SweetAlert2 para las notificaciones, asi como
                     DOMPurify para limpiar nuestras consultas e inputs de ataques
                     XSS
-    --Notes:        En IOS se han tenido problemas de compatibilidad en Android al 
+    --Notes:        En IOS se han tenido problemas de compatibilidad en Android al
                     parecer todo bien.
 */
 //VARIABLES GLOBALES
@@ -206,20 +206,20 @@ function banner() {
 
 }
 
-instructionsBanner.addEventListener('click', () => {
-    Swal.fire({
-        title: '<img src="images/ibero.png" width="60" height="60" class="img" alt="user">',
-        html:
-          '<div class="col-md-12"><h2>Instrucciones de instalación</h2></div>'+
-          '<div><strong>Safari/IOS</strong></div>'+
-          '<div><p>Toca el icono de "Compartir" en la parte inferior de tu navegador (Safari). Es un cuadro con una flecha arriba</p></div>'+
-          '<div><p>Aparecera una ventana emergente donde podremos personalizar el nombre si asi se desea. Tocar "Agregar" en la esquina superior derecha</p></div>'+
-          '<div><p>Se agregara nuestra app a tu pantalla de inicio y desde este momento podras acceder a ella como cualquier otra app.</p></div>',
-        focusConfirm: false,
-        confirmButtonText:
-          '<i class="fa fa-thumbs-up"></i> Entendido!',
-      })
-});
+// instructionsBanner.addEventListener('click', () => {
+//     Swal.fire({
+//         title: '<img src="images/ibero.png" width="60" height="60" class="img" alt="user">',
+//         html:
+//           '<div class="col-md-12"><h2>Instrucciones de instalación</h2></div>'+
+//           '<div><strong>Safari/IOS</strong></div>'+
+//           '<div><p>Toca el icono de "Compartir" en la parte inferior de tu navegador (Safari). Es un cuadro con una flecha arriba</p></div>'+
+//           '<div><p>Aparecera una ventana emergente donde podremos personalizar el nombre si asi se desea. Tocar "Agregar" en la esquina superior derecha</p></div>'+
+//           '<div><p>Se agregara nuestra app a tu pantalla de inicio y desde este momento podras acceder a ella como cualquier otra app.</p></div>',
+//         focusConfirm: false,
+//         confirmButtonText:
+//           '<i class="fa fa-thumbs-up"></i> Entendido!',
+//       })
+// });
 
 var a = detectarSistemaOperativo();
 alert(a)

@@ -144,10 +144,8 @@ body {
       border-radius: 5px;
     }
 
-
-    .swal2-popup {
-      text-align: left !important; /* Cambiar la alineación de los elementos a la izquierda */
-      justify-content: flex-start !important; /* Cambiar la alineación horizontal a la izquierda */
-      align-items: flex-start !important; /* Cambiar la alineación vertical a la parte superior */
+    .swal2-confirm {
+      background-color: #ec3b43 !important; /* Cambiar el fondo del botón a verde */
+      color: white;
+      border-color: #ec3b43 !important; /* Cambiar el color del texto del botón a blanco */
   }
-  

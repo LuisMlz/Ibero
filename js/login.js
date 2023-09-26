@@ -208,6 +208,7 @@ function banner() {
             '<div style="text-align: left;">'+
                 '<ul>'+
                     '<li><p>Toca el icono de <strong>"Compartir"</strong> en la parte inferior de tu navegador (Safari).</p></li>'+
+                    '<li><p>Se desplegara un menu donde tendremos que seleccionar la opción <strong>"Agregar a inicio"</strong>.</p></li>'+
                     '<li><p>Aparecera una ventana emergente donde podremos personalizar el nombre si asi se desea. Tocar <strong>"Agregar"</strong> en la esquina superior derecha</p></li>'+
                     '<li><p>Se agregara nuestra app a tu pantalla de inicio.</p></li>'
                 '</ul>'+
@@ -231,7 +232,7 @@ function banner() {
             html: instrucciones,
             focusConfirm: false,
             confirmButtonText:
-              '<i class="fa fa-thumbs-up"></i> Entendido!',
+              '<i class="fa fa-thumbs-up"></i>Entendido!',
           })
     });
 

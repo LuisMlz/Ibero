@@ -1,9 +1,6 @@
 const staticVCard = "vcard-v1";
 const assets = [
   "./",
-  "./js/login.js",
-  "./index.html",
-  "./css/loginStyle.css",
   "./js/app.js",
   "./vcard.html",
   "./css/style.css",
@@ -17,10 +14,21 @@ self.addEventListener("install", installEvent => {
   );
 });
 
-self.addEventListener("fetch", fetchEvent => {
-  fetchEvent.respondWith(
-    caches.match(fetchEvent.request).then(res => {
-      return res || fetch(fetchEvent.request);
-    })
+self.addEventListener('fetch', function(event) {
+  event.respondWith(
+      caches.match(event.request).then(function(response) {
+          // Si la solicitud es para la página de inicio de sesión, ve a la red en lugar de la caché
+          if (event.request.url.includes('/index.html')) {
+              return fetch(event.request);
+          }
+
+          // Si la solicitud está en la caché, sirve la respuesta desde la caché
+          if (response) {
+              return response;
+          }
+
+          // Si la solicitud no está en la caché, ve a la red
+          return fetch(event.request);
+      })
   );
 });

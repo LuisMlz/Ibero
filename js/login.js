@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const authDB = indexedDB.open('vcard', 1);
 
     function checkAuthentication() {
-        alert("ENTRO AL REGRESAR")
+        
             authDB.onblocked = function () {
                 console.log("database bloqueada")
             }

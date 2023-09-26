@@ -254,8 +254,6 @@ function banner() {
 
 
     if (window.matchMedia('(display-mode: standalone)').matches) {
-        // La aplicación está en la pantalla de inicio de iOS
-        alert("¡Agregado a la pantalla de inicio!");
         parrafo.innerText = ""
         parrafo.innerText = "Bienvenido a tu VCard"
     }

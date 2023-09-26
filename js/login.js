@@ -11,15 +11,14 @@
                     parecer todo bien.
 */
 
+
 document.addEventListener("DOMContentLoaded", function() {
 
     //VARIABLES GLOBALES
     const authDB = indexedDB.open('vcard', 1);
 
     function checkAuthentication() {
-
-        
-        
+        alert("ENTRO AL REGRESAR")
             authDB.onblocked = function () {
                 console.log("database bloqueada")
             }

@@ -1,12 +1,11 @@
-
 document.addEventListener("DOMContentLoaded", function() {
     // Abre la base de datos IndexedDB
     const authDB = indexedDB.open('vcard', 1);
     const container = document.querySelector(".divVCard");
-    var bandera = true;
+
     // Función para verificar la autenticación
     function checkAuthentication() {
-
+        
         authDB.onblocked = function () {
             console.log("database bloqueada")
         }
@@ -33,8 +32,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 const result = event.target.result;
 
                 if (!result) {
-                    bandera = false
-                    
+                    window.location.href = 'index.html';
                 } else { 
                     peticion(result)
                 }
@@ -51,10 +49,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     }
 
-    if (bandera == false) {
-        // Redirigir a la página de inicio de sesión si el usuario no está autenticado
-        window.location.href = '/index';
-    }
     //PROCESOS DE LA INTERFAZ
     var showVCard = () => {
         var output = "<img class='vcardImage' src='' alt='NO PUDIMOS ENCONTRAR TU IMAGEN' id='vcardpwa' />";

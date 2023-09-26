@@ -174,6 +174,7 @@ function banner() {
     var dismissButton = document.getElementById('dismiss-button');
     var installBanner = document.getElementById('install-banner');
     var instructionsBanner = document.getElementById('linkInstrucciones');
+    let parrafo = document.getElementById('divDescripcion');
 
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
@@ -224,6 +225,17 @@ function banner() {
                     '<li><p>Se recomienda abrirlo en <strong>Chrome</strong> para mejor compatibilidad de sus funciones.</p></li>'+
                 '</ul>'+
             '</div>'
+        }else if (SO == "Android"){
+            instrucciones = '<div class="col-md-12"><h2>Instrucciones de instalación</h2></div>'+
+            '<div><strong>Android</strong></div>'+
+            '<div style="text-align: left;">'+
+                '<ul>'+
+                    '<li><p>Click en el botón <strong>"instalar"</strong> que aparece en la parte inferior dentro del banner</p></li>'+
+                    '<li><p>Se mostrara una pregunta de confirmación donde daremos un toque en <strong>"Agregar"</strong></p></li>'+
+                    '<li><p>Esperamos unos momentos y se abra agregado a nuestra galeria de Apps</p></li>'+
+                    '<li><p>Se recomienda abrirlo en <strong>Chrome</strong> para mejor compatibilidad de sus funciones.</p></li>'+
+                '</ul>'+
+            '</div>'
         }
 
 
@@ -242,7 +254,9 @@ function banner() {
 
     window.addEventListener('appinstalled', () => {
         deferredPrompt = null;
-        
+        //divDescripcion
+        parrafo.innerText = ""
+        parrafo.innerText = "Bienvenido a tu VCard"
     });
 
 }

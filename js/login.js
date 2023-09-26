@@ -58,6 +58,8 @@ function checkAuthentication() {
 
 }
 
+checkAuthentication()
+
 const loginForm = document.getElementById('login-form');
 const userInput = document.getElementById('user');
 const passwordInput = document.getElementById('password');

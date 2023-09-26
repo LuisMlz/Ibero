@@ -55,9 +55,13 @@ body {
   }
   .eula {
     color: #ec3b43;
-    font-size: 14px;
+    font-size: 16px;
     line-height: 1.5;
     margin: 40px;
+  }
+  .pwa{
+    color: #ec3b43;
+    text-decoration: none;
   }
   .right {
     background: #ec3b43;
@@ -139,4 +143,11 @@ body {
       cursor: pointer;
       border-radius: 5px;
     }
+
+
+    .swal2-popup {
+      text-align: left !important; /* Cambiar la alineación de los elementos a la izquierda */
+      justify-content: flex-start !important; /* Cambiar la alineación horizontal a la izquierda */
+      align-items: flex-start !important; /* Cambiar la alineación vertical a la parte superior */
+  }
   

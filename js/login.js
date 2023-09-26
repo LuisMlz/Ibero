@@ -1,13 +1,13 @@
 /*
     -- Author:	Luis Melendez
     -- Create date: 11/09/2023
-    -- Update date: 25/09/2023
+    -- Update date: 25/09/2023 
     -- Description:	PWA creado con la finalidad de mostrar el VCARD en la app
                     asi como en el navegador.
     --Update:       Se agrego la libreria SweetAlert2 para las notificaciones, asi como
                     DOMPurify para limpiar nuestras consultas e inputs de ataques
                     XSS
-    --Notes:        En IOS se han tenido problemas de compatibilidad en Android al
+    --Notes:        En IOS se han tenido problemas de compatibilidad en Android al 
                     parecer todo bien.
 */
 //VARIABLES GLOBALES
@@ -64,8 +64,6 @@ const loginForm = document.getElementById('login-form');
 const userInput = document.getElementById('user');
 const passwordInput = document.getElementById('password');
 const loginButton = document.getElementById('btnLogin');
-var instructionsBanner = document.getElementById('linkInstrucciones');
-
 
 // Iniciar Sesión
 loginButton.addEventListener('click', () => {
@@ -175,6 +173,7 @@ function banner() {
     var installButton = document.getElementById('install-button');
     var dismissButton = document.getElementById('dismiss-button');
     var installBanner = document.getElementById('install-banner');
+    var instructionsBanner = document.getElementById('linkInstrucciones');
 
     window.addEventListener('beforeinstallprompt', (e) => {
         e.preventDefault();
@@ -198,49 +197,54 @@ function banner() {
         installBanner.style.display = 'none';
     });
 
+    instructionsBanner.addEventListener('click', () => {
+        
+        var instrucciones=""
+        var SO = detectarSistemaOperativo();
+
+        if(SO == "IOS"){
+            instrucciones = '<div class="col-md-12"><h2>Instrucciones de instalación</h2></div>'+
+            '<div><strong>IOS</strong></div>'+
+            '<div style="text-align: left;">'+
+                '<ul>'+
+                    '<li><p>Toca el icono de <strong>"Compartir"</strong> en la parte inferior de tu navegador (Safari).</p></li>'+
+                    '<li><p>Aparecera una ventana emergente donde podremos personalizar el nombre si asi se desea. Tocar <strong>"Agregar"</strong> en la esquina superior derecha</p></li>'+
+                    '<li><p>Se agregara nuestra app a tu pantalla de inicio.</p></li>'
+                '</ul>'+
+            '</div>'
+        }else if (SO == "Windows"){
+            instrucciones = '<div class="col-md-12"><h2>Instrucciones de instalación</h2></div>'+
+            '<div><strong>WIndows</strong></div>'+
+            '<div style="text-align: left;">'+
+                '<ul>'+
+                    '<li><p>Click en el botón <strong>"instalar"</strong> que aparece en la parte inferior dentro del banner</p></li>'+
+                    '<li><p>En la parte superior derecha aparecera un apartado donde confirmaras la instalación</p></li>'+
+                    '<li><p>Se agregara a tu barra de tareas y escritorio</p></li>'+
+                    '<li><p>Se recomienda abrirlo en <strong>Chrome</strong> para mejor compatibilidad de sus funciones.</p></li>'+
+                '</ul>'+
+            '</div>'
+        }
+
+
+        Swal.fire({
+            title: '<img src="images/ibero.png" width="60" height="60" class="img" alt="user">',
+            html: instrucciones,
+            focusConfirm: false,
+            confirmButtonText:
+              '<i class="fa fa-thumbs-up"></i> Entendido!',
+          })
+    });
 
     dismissButton.addEventListener('click', () => {
         installBanner.style.display = 'none';
     });
 
+    window.addEventListener('appinstalled', () => {
+        deferredPrompt = null;
+        
+    });
 
 }
-
-// instructionsBanner.addEventListener('click', () => {
-//     Swal.fire({
-//         title: '<img src="images/ibero.png" width="60" height="60" class="img" alt="user">',
-//         html:
-//           '<div class="col-md-12"><h2>Instrucciones de instalación</h2></div>'+
-//           '<div><strong>Safari/IOS</strong></div>'+
-//           '<div><p>Toca el icono de "Compartir" en la parte inferior de tu navegador (Safari). Es un cuadro con una flecha arriba</p></div>'+
-//           '<div><p>Aparecera una ventana emergente donde podremos personalizar el nombre si asi se desea. Tocar "Agregar" en la esquina superior derecha</p></div>'+
-//           '<div><p>Se agregara nuestra app a tu pantalla de inicio y desde este momento podras acceder a ella como cualquier otra app.</p></div>',
-//         focusConfirm: false,
-//         confirmButtonText:
-//           '<i class="fa fa-thumbs-up"></i> Entendido!',
-//       })
-// });
-
-var a = detectarSistemaOperativo();
-alert(a)
-var b = detectarTipoDeDispositivo();
-alert(b)
-
-// Detectar el tipo de dispositivo
-function detectarTipoDeDispositivo() {
-    const userAgent = navigator.userAgent;
-
-    if (/Android/i.test(userAgent)) {
-        return "Android";
-    } else if (/iPhone|iPad|iPod/i.test(userAgent)) {
-        return "iOS";
-    } else if (/Windows Phone/i.test(userAgent)) {
-        return "Windows Phone";
-    } else {
-        return "Otro";
-    }
-}
-
 // Detectar el sistema operativo
 function detectarSistemaOperativo() {
     const userAgent = navigator.userAgent;

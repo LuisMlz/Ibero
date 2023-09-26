@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", showVCard)
 function peticion(param) {
 
     const cleanParam = DOMPurify.sanitize(param)
-
+    alert("ENTRO AL METODO PETICION")
     const db = authDB.result;
 
     const transaction = db.transaction(['card'], 'readonly');

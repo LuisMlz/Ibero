@@ -64,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     checkAuthentication()
+    banner()
 
     const userInput = document.getElementById('user');
     const passwordInput = document.getElementById('password');
@@ -158,16 +159,6 @@ document.addEventListener("DOMContentLoaded", function() {
 
     }
 
-    if ("serviceWorker" in navigator) {
-        window.addEventListener("load", function () {
-            navigator.serviceWorker
-                .register("./serviceWorker.js")
-                .then(banner(),
-                    console.log("service worker registrado"),
-                )
-                .catch(err => console.log("service worker no registrado", err));
-        });
-    }
     //CREACIÓN DE BANNER DE INSTALACIÓN
     function banner() {
 
@@ -281,4 +272,13 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
 });
+
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+        navigator.serviceWorker
+            .register("./serviceWorker.js")
+            .then(console.log("service worker registrado"))
+            .catch(err => console.log("service worker no registrado", err));
+    });
+}
 

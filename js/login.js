@@ -202,7 +202,7 @@ function banner() {
         var instrucciones=""
         var SO = detectarSistemaOperativo();
 
-        if(SO == "IOS"){
+        if(SO == "iOS"){
             instrucciones = '<div class="col-md-12"><h2>Instrucciones de instalación</h2></div>'+
             '<div><strong>IOS</strong></div>'+
             '<div style="text-align: left;">'+
